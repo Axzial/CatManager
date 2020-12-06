@@ -16,12 +16,10 @@ public class Cat {
     @Column(name = "cat_name")
     private String name;
     @ManyToOne
-    @Column(name = "cat_breed")
     private CatBreed catBreed;
     @Column(name = "cat_color")
     private String color;
     @ManyToOne
-    @Column(name = "cat_owner")
     private CatOwner owner;
 
 
