@@ -1,4 +1,4 @@
-package fr.axzial.catmanager.dto;
+package fr.axzial.catmanager.dto.entity;
 
 import fr.axzial.catmanager.model.Cat;
 import lombok.Data;

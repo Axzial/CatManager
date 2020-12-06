@@ -1,15 +1,14 @@
-package fr.axzial.catmanager.dto;
+package fr.axzial.catmanager.dto.requestbody;
 
 import fr.axzial.catmanager.model.CatBreed;
-import fr.axzial.catmanager.model.CatOwner;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
-public class CatDto {
+public class CatWithOwnerIdDto {
     private String name;
-    private CatBreed catBreed;
+    private long catBreedId;
     private String color;
-    private CatOwner owner;
+    private long ownerId;
 }

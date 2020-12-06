@@ -4,11 +4,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 @Entity
-@NoArgsConstructor
 @Data
 public class CatOwner {
     @Id
@@ -23,5 +23,9 @@ public class CatOwner {
 
     public void addCat(Cat cat){
         catList.add(cat);
+    }
+
+    public CatOwner() {
+        catList = new ArrayList<>();
     }
 }

@@ -1,16 +1,20 @@
 package fr.axzial.catmanager.service;
 
-import fr.axzial.catmanager.dto.CatDto;
-import fr.axzial.catmanager.dto.CatWithOwnerIdDto;
+import fr.axzial.catmanager.dto.entity.CatDto;
+import fr.axzial.catmanager.dto.requestbody.CatWithOwnerIdDto;
+import fr.axzial.catmanager.dto.returnbody.CatReturnDto;
 import fr.axzial.catmanager.exception.CatNotFoundException;
 import fr.axzial.catmanager.model.Cat;
+import fr.axzial.catmanager.model.CatBreed;
 import fr.axzial.catmanager.model.CatOwner;
+import fr.axzial.catmanager.repository.CatBreedRepository;
 import fr.axzial.catmanager.repository.CatOwnerRepository;
 import fr.axzial.catmanager.repository.CatRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,11 +24,13 @@ public class CatServiceImpl implements CatService {
 
     private final CatRepository catRepository;
     private final CatOwnerRepository catOwnerRepository;
+    private final CatBreedRepository catBreedRepository;
     private final ModelMapper modelMapper = new ModelMapper();
 
-    public CatServiceImpl(CatRepository catRepository, CatOwnerRepository catOwnerRepository) {
+    public CatServiceImpl(CatRepository catRepository, CatOwnerRepository catOwnerRepository, CatBreedRepository catBreedRepository) {
         this.catRepository = catRepository;
         this.catOwnerRepository = catOwnerRepository;
+        this.catBreedRepository = catBreedRepository;
     }
 
     @Override
@@ -38,26 +44,43 @@ public class CatServiceImpl implements CatService {
     }
 
     @Override
+    public List<CatReturnDto> findAllSimple() {
+        List<Cat> catList = catRepository.findAll();
+        List<CatReturnDto> catReturnDtoList = new ArrayList<>();
+        for (Cat cat : catList){
+            CatReturnDto catReturnDto = modelMapper.map(cat, CatReturnDto.class);
+            catReturnDtoList.add(catReturnDto);
+        }
+        System.out.println(catReturnDtoList);
+        return catReturnDtoList;
+    }
+
+    @Override
     public Cat save(CatDto catDto) {
         Cat cat = modelMapper.map(catDto, Cat.class);
         return catRepository.save(cat);
     }
 
     @Override
-    public Cat saveWithOwnerIdDto(CatWithOwnerIdDto catWithOwnerIdDto) {
+    public CatReturnDto saveWithOwnerIdDto(CatWithOwnerIdDto catWithOwnerIdDto) {
         Cat cat = new Cat();
         cat.setName(catWithOwnerIdDto.getName());
         cat.setColor(catWithOwnerIdDto.getColor());
-        cat.setCatBreed(catWithOwnerIdDto.getCatBreed());
 
-        Optional<CatOwner> optionalCatOwner= catOwnerRepository.findById(catWithOwnerIdDto.getOwnerId());
+        Optional<CatBreed> optionalCatBreed = catBreedRepository.findById(catWithOwnerIdDto.getCatBreedId());
+        if (optionalCatBreed.isEmpty()) cat.setCatBreed(null);
+        else {
+            cat.setCatBreed(optionalCatBreed.get());
+        }
+
+        Optional<CatOwner> optionalCatOwner = catOwnerRepository.findById(catWithOwnerIdDto.getOwnerId());
 
         if (optionalCatOwner.isEmpty()) cat.setOwner(null);
         else{
             cat.setOwner(optionalCatOwner.get());
         }
 
-        return catRepository.save(cat);
+        return modelMapper.map(catRepository.save(cat), CatReturnDto.class);
     }
 
     @Override
