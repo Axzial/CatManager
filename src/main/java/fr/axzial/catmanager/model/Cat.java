@@ -21,4 +21,8 @@ public class Cat {
     private String color;
     @ManyToOne
     private CatOwner owner;
+
+    public Cat(String name) {
+        this.name = name;
+    }
 }

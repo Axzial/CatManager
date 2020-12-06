@@ -34,7 +34,7 @@ public class CatOwnerController {
 
     @PutMapping
     public ResponseEntity<CatOwner> addCat(@RequestBody CatOwnerDto catOwnerDto){
-        return new ResponseEntity<>(catOwnerService.save(catOwnerDto), HttpStatus.CREATED);
+        return new ResponseEntity<>(catOwnerService.saveWithCatsId(catOwnerDto), HttpStatus.CREATED);
     }
 
     @PatchMapping("/{id}")

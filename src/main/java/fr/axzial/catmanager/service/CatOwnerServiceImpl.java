@@ -5,6 +5,7 @@ import fr.axzial.catmanager.exception.BreedNotFoundException;
 import fr.axzial.catmanager.exception.CatOwnerNotFoundException;
 import fr.axzial.catmanager.model.CatOwner;
 import fr.axzial.catmanager.repository.CatOwnerRepository;
+import fr.axzial.catmanager.repository.CatRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +18,12 @@ import java.util.Optional;
 public class CatOwnerServiceImpl implements CatOwnerService {
 
     private final CatOwnerRepository catOwnerRepository;
+    private final CatRepository catRepository;
     private final ModelMapper modelMapper = new ModelMapper();
 
-    public CatOwnerServiceImpl(CatOwnerRepository catOwnerRepository) {
+    public CatOwnerServiceImpl(CatOwnerRepository catOwnerRepository, CatRepository catRepository) {
         this.catOwnerRepository = catOwnerRepository;
+        this.catRepository = catRepository;
     }
 
     @Override
@@ -36,6 +39,17 @@ public class CatOwnerServiceImpl implements CatOwnerService {
     @Override
     public CatOwner save(CatOwnerDto catOwnerDto) {
         CatOwner catOwner = modelMapper.map(catOwnerDto, CatOwner.class);
+        catOwnerRepository.save(catOwner);
+        if (!catOwner.getCatList().isEmpty()){
+            catOwner.getCatList().stream().peek(e -> e.setOwner(catOwner)).forEach(catRepository::save);
+        }
+        return catOwnerRepository.save(catOwner);
+    }
+
+    @Override
+    public CatOwner saveWithCatsId(CatOwnerDto catOwnerNoCatsDto) {
+        CatOwner catOwner = new CatOwner();
+        catOwner.setName(catOwnerNoCatsDto.getName());
         return catOwnerRepository.save(catOwner);
     }
 

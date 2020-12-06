@@ -1,6 +1,7 @@
 package fr.axzial.catmanager.service;
 
 import fr.axzial.catmanager.dto.CatDto;
+import fr.axzial.catmanager.dto.CatWithOwnerIdDto;
 import fr.axzial.catmanager.exception.CatNotFoundException;
 import fr.axzial.catmanager.model.Cat;
 
@@ -11,6 +12,7 @@ public interface CatService {
     List<Cat> findAll();
     Optional<Cat> findById(long id);
     Cat save(CatDto catDto);
+    Cat saveWithOwnerIdDto(CatWithOwnerIdDto catWithOwnerIdDto);
     Optional<Cat> update(long id, CatDto catDto) throws CatNotFoundException;
     void delete(long id) throws CatNotFoundException;
 }

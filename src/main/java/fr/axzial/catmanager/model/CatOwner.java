@@ -20,4 +20,8 @@ public class CatOwner {
     @OneToMany
     @Column(name = "cat_owner_cats")
     private List<Cat> catList;
+
+    public void addCat(Cat cat){
+        catList.add(cat);
+    }
 }

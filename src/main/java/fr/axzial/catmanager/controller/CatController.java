@@ -1,11 +1,10 @@
 package fr.axzial.catmanager.controller;
 
-import fr.axzial.catmanager.dto.CatBreedDto;
 import fr.axzial.catmanager.dto.CatDto;
-import fr.axzial.catmanager.exception.BreedNotFoundException;
+import fr.axzial.catmanager.dto.CatWithOwnerIdDto;
 import fr.axzial.catmanager.exception.CatNotFoundException;
+import fr.axzial.catmanager.exception.CatOwnerNotFoundException;
 import fr.axzial.catmanager.model.Cat;
-import fr.axzial.catmanager.model.CatBreed;
 import fr.axzial.catmanager.service.CatService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -37,8 +36,8 @@ public class CatController {
     }
 
     @PutMapping
-    public ResponseEntity<Cat> addCat(@RequestBody CatDto catDto){
-        return new ResponseEntity<>(catService.save(catDto), HttpStatus.CREATED);
+    public ResponseEntity<Cat> addCat(@RequestBody CatWithOwnerIdDto catWithOwnerIdDto){
+        return new ResponseEntity<>(catService.saveWithOwnerIdDto(catWithOwnerIdDto), HttpStatus.CREATED);
     }
 
     @PatchMapping("/{id}")
