@@ -15,11 +15,12 @@ import java.util.Optional;
 @Transactional
 public class CatBreedServiceImpl implements CatBreedService {
 
-    private final CatBreedRepository catBreedRepository;
     private final ModelMapper modelMapper = new ModelMapper();
 
-    public CatBreedServiceImpl(CatBreedRepository catBreedRepository) {
-        this.catBreedRepository = catBreedRepository;
+    private final CatBreedRepository catBreedRepository;
+
+    public CatBreedServiceImpl(CatBreedRepository CatBreedRepository) {
+        this.catBreedRepository = CatBreedRepository;
     }
 
     @Override

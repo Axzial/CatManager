@@ -21,6 +21,4 @@ public class Cat {
     private String color;
     @ManyToOne
     private CatOwner owner;
-
-
 }
