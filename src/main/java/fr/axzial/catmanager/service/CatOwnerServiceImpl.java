@@ -43,6 +43,7 @@ public class CatOwnerServiceImpl implements CatOwnerService {
     public Optional<CatOwner> update(long id, CatOwnerDto catOwnerDto) throws BreedNotFoundException {
         if (findById(id).isPresent()){
             CatOwner catOwner = modelMapper.map(catOwnerDto, CatOwner.class);
+            catOwner.setId(id);
             CatOwner savedCatOwner = catOwnerRepository.save(catOwner);
             return Optional.of(savedCatOwner);
         } else throw new CatOwnerNotFoundException("Can't find CatOwner with id: " + id);
