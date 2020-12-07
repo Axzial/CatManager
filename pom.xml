@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>fr.axzial</groupId>
 	<artifactId>catmanager</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>CatManager</name>
 	<description>A Cat Manager Made With Spring Boot</description>
 
@@ -74,11 +74,6 @@
 			<version>3.0.0</version>
 		</dependency>
 		<dependency>
-			<groupId>org.liquibase</groupId>
-			<artifactId>liquibase-core</artifactId>
-			<version>4.2.0</version>
-		</dependency>
-		<dependency>
 			<groupId>org.modelmapper</groupId>
 			<artifactId>modelmapper</artifactId>
 			<version>2.3.5</version>
@@ -102,6 +97,15 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+        		<groupId>org.apache.maven.plugins</groupId>
+        		<artifactId>maven-compiler-plugin</artifactId>
+        		<version>3.8.0</version>
+        		<configuration>
+            		<source>11</source> 
+            		<target>11</target>
+        		</configuration>
+    </plugin>
 		</plugins>
 	</build>
 
