@@ -93,7 +93,8 @@ public class CatOwnerServiceImpl implements CatOwnerService {
 
     @Override
     public void delete(long id) throws BreedNotFoundException {
-        if (findById(id).isPresent()){
+        if (catOwnerRepository.findById(id).isPresent()){
+            catOwnerRepository.findById(id).get().getCatList().forEach(e -> e.setOwner(null));
             catOwnerRepository.deleteById(id);
         } else throw new CatOwnerNotFoundException("Can't find CatOwner with id: " + id);
     }

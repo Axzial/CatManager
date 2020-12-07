@@ -6,6 +6,7 @@ import fr.axzial.catmanager.dto.returnbody.CatReturnDto;
 import fr.axzial.catmanager.exception.CatNotFoundException;
 import fr.axzial.catmanager.model.Cat;
 import fr.axzial.catmanager.service.CatService;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import java.util.List;
 public class CatController {
 
     private final CatService catService;
+    private final ModelMapper modelMapper = new ModelMapper();
 
     public CatController(CatService catService) {
         this.catService = catService;
@@ -30,8 +32,8 @@ public class CatController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Cat> getCat(@PathVariable long id){
-        return catService.findById(id).map(ResponseEntity::ok)
+    public ResponseEntity<CatReturnDto> getCat(@PathVariable long id){
+        return catService.findByIdSimple(id).map(ResponseEntity::ok)
                 .orElseThrow(() -> new CatNotFoundException("Can't find Cat with id: " + id));
     }
 
@@ -41,8 +43,8 @@ public class CatController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Cat> update(@PathVariable long id, @RequestBody CatDto catDto){
-        return catService.update(id, catDto).map(ResponseEntity::ok)
+    public ResponseEntity<CatReturnDto> update(@PathVariable long id, @RequestBody CatWithOwnerIdDto catWithOwnerIdDto){
+        return catService.updateWithOwnerIdDto(id, catWithOwnerIdDto).map(ResponseEntity::ok)
                 .orElseThrow(() -> new CatNotFoundException("Can't find Cat with id: " + id));
     }
 

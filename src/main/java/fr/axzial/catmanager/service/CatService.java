@@ -13,11 +13,12 @@ import java.util.Optional;
 public interface CatService {
     List<Cat> findAll();
     Optional<Cat> findById(long id);
-
     Cat save(CatDto catDto);
     CatReturnDto saveWithOwnerIdDto(CatWithOwnerIdDto catWithOwnerIdDto);
     Optional<Cat> update(long id, CatDto catDto) throws CatNotFoundException;
     void delete(long id) throws CatNotFoundException;
-
     List<CatReturnDto> findAllSimple();
+    Optional<CatReturnDto> findByIdSimple(long id);
+
+    Optional<CatReturnDto> updateWithOwnerIdDto(long id, CatWithOwnerIdDto catWithOwnerIdDto);
 }

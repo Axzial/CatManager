@@ -28,4 +28,9 @@ public class CatOwner {
     public CatOwner() {
         catList = new ArrayList<>();
     }
+
+    public CatOwner(String name) {
+        this.name = name;
+        catList = new ArrayList<>();
+    }
 }
