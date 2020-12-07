@@ -1,8 +1,9 @@
 package fr.axzial.catmanager.service;
 
-import fr.axzial.catmanager.dto.entity.CatOwnerDto;
-import fr.axzial.catmanager.dto.requestbody.CatOwnerWithCatsIdDto;
-import fr.axzial.catmanager.dto.returnbody.CatOwnerReturnDto;
+import fr.axzial.catmanager.dto.CatOwnerDto;
+import fr.axzial.catmanager.dto.CatOwnerSimpleDto;
+import fr.axzial.catmanager.dto.CatOwnerWithCatsIdDto;
+import fr.axzial.catmanager.dto.CatOwnerReturnDto;
 import fr.axzial.catmanager.exception.CatOwnerNotFoundException;
 import fr.axzial.catmanager.model.CatOwner;
 
@@ -22,7 +23,7 @@ public interface CatOwnerService {
     List<CatOwner> findAll();
 
     /**
-     * Find all {@link fr.axzial.catmanager.dto.returnbody.CatOwnerSimpleDto}.
+     * Find all {@link CatOwnerSimpleDto}.
      *
      * @return the list
      */

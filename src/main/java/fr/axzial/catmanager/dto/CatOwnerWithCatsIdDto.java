@@ -1,4 +1,4 @@
-package fr.axzial.catmanager.dto.requestbody;
+package fr.axzial.catmanager.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

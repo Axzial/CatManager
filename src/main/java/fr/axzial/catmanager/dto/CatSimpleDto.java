@@ -1,4 +1,4 @@
-package fr.axzial.catmanager.dto.returnbody;
+package fr.axzial.catmanager.dto;
 
 import fr.axzial.catmanager.model.CatBreed;
 import lombok.Data;
