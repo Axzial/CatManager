@@ -14,38 +14,75 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The {@link CatOwner} controller.
+ */
 @RestController
 @RequestMapping(value = "/catowner")
 public class CatOwnerController {
 
     private final CatOwnerService catOwnerService;
 
+    /**
+     * Instantiates a new Cat owner controller.
+     *
+     * @param catOwnerService is the {@link CatOwnerService}
+     */
     public CatOwnerController(CatOwnerService catOwnerService) {
         this.catOwnerService = catOwnerService;
     }
 
+    /**
+     * Get all {@link CatOwner}
+     *
+     * @return the response entity
+     */
     @GetMapping
     public ResponseEntity<List<CatOwnerReturnDto>> getOwners(){
         return new ResponseEntity<>(catOwnerService.findAllSimple(), new HttpHeaders(), HttpStatus.OK);
     }
 
+    /**
+     * Get a single {@link CatOwner}
+     *
+     * @param id the id of the {@link CatOwner}
+     * @return the response entity
+     */
     @GetMapping("/{id}")
     public ResponseEntity<CatOwner> getOwner(@PathVariable long id){
         return catOwnerService.findById(id).map(ResponseEntity::ok)
                 .orElseThrow(() -> new CatOwnerNotFoundException("Can't find CatOwner with id: " + id));
     }
 
+    /**
+     * Add a new {@link CatOwner}
+     *
+     * @param catOwnerWithCatsId the {@link CatOwner} with cats id
+     * @return the response entity
+     */
     @PutMapping
     public ResponseEntity<CatOwnerReturnDto> addCatOwner(@RequestBody CatOwnerWithCatsId catOwnerWithCatsId){
         return new ResponseEntity<>(catOwnerService.saveWithCatsId(catOwnerWithCatsId), HttpStatus.CREATED);
     }
 
+    /**
+     * Update a {@link CatOwner}
+     *
+     * @param id          the id of the {@link CatOwner}
+     * @param catOwnerDto the cat owner dto
+     * @return the response entity
+     */
     @PatchMapping("/{id}")
     public ResponseEntity<CatOwner> update(@PathVariable long id, @RequestBody CatOwnerDto catOwnerDto){
         return catOwnerService.update(id, catOwnerDto).map(ResponseEntity::ok)
                 .orElseThrow(() -> new CatOwnerNotFoundException("Can't find CatOwner with id: " + id));
     }
 
+    /**
+     * Delete a {@link CatOwner}.
+     *
+     * @param id the id of the {@link CatOwner}
+     */
     @DeleteMapping("/{id}")
     public void delete(@PathVariable long id){
         catOwnerService.delete(id);
