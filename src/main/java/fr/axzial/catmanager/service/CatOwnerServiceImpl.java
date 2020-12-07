@@ -1,10 +1,8 @@
 package fr.axzial.catmanager.service;
 
 import fr.axzial.catmanager.dto.entity.CatOwnerDto;
-import fr.axzial.catmanager.dto.requestbody.CatOwnerWithCatsId;
+import fr.axzial.catmanager.dto.requestbody.CatOwnerWithCatsIdDto;
 import fr.axzial.catmanager.dto.returnbody.CatOwnerReturnDto;
-import fr.axzial.catmanager.dto.returnbody.CatOwnerSimpleDto;
-import fr.axzial.catmanager.dto.returnbody.CatSimpleDto;
 import fr.axzial.catmanager.exception.BreedNotFoundException;
 import fr.axzial.catmanager.exception.CatOwnerNotFoundException;
 import fr.axzial.catmanager.model.Cat;
@@ -19,6 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The {@link CatOwner} service implementation.
+ */
 @Service
 @Transactional
 public class CatOwnerServiceImpl implements CatOwnerService {
@@ -27,6 +28,12 @@ public class CatOwnerServiceImpl implements CatOwnerService {
     private final CatRepository catRepository;
     private final ModelMapper modelMapper = new ModelMapper();
 
+    /**
+     * Instantiates a new Cat owner service.
+     *
+     * @param catOwnerRepository the {@link CatOwnerRepository}
+     * @param catRepository      the {@link CatRepository}
+     */
     public CatOwnerServiceImpl(CatOwnerRepository catOwnerRepository, CatRepository catRepository) {
         this.catOwnerRepository = catOwnerRepository;
         this.catRepository = catRepository;
@@ -63,11 +70,11 @@ public class CatOwnerServiceImpl implements CatOwnerService {
     }
 
     @Override
-    public CatOwnerReturnDto saveWithCatsId(CatOwnerWithCatsId catOwnerWithCatsId) {
+    public CatOwnerReturnDto saveWithCatsId(CatOwnerWithCatsIdDto catOwnerWithCatsIdDto) {
         CatOwner catOwner = new CatOwner();
-        catOwner.setName(catOwnerWithCatsId.getName());
-        if (catOwnerWithCatsId.getCatList() != null){
-            catOwnerWithCatsId.getCatList().forEach(e -> {
+        catOwner.setName(catOwnerWithCatsIdDto.getName());
+        if (catOwnerWithCatsIdDto.getCatList() != null){
+            catOwnerWithCatsIdDto.getCatList().forEach(e -> {
                 Optional<Cat> optionalCat = catRepository.findById(e);
                 if (optionalCat.isPresent()){
                     Cat cat = optionalCat.get();

@@ -11,6 +11,9 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The {@link CatBreed} service implementation.
+ */
 @Service
 @Transactional
 public class CatBreedServiceImpl implements CatBreedService {
@@ -19,6 +22,11 @@ public class CatBreedServiceImpl implements CatBreedService {
 
     private final CatBreedRepository catBreedRepository;
 
+    /**
+     * Instantiates a new Cat breed service.
+     *
+     * @param CatBreedRepository the {@link CatBreedRepository}
+     */
     public CatBreedServiceImpl(CatBreedRepository CatBreedRepository) {
         this.catBreedRepository = CatBreedRepository;
     }

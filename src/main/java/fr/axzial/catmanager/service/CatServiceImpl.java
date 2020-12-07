@@ -18,6 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The {@link Cat} service implementation.
+ */
 @Service
 @Transactional
 public class CatServiceImpl implements CatService {
@@ -27,6 +30,13 @@ public class CatServiceImpl implements CatService {
     private final CatBreedRepository catBreedRepository;
     private final ModelMapper modelMapper = new ModelMapper();
 
+    /**
+     * Instantiates a new Cat service.
+     *
+     * @param catRepository      the {@link CatRepository}
+     * @param catOwnerRepository the {@link CatOwnerRepository}
+     * @param catBreedRepository the {@link CatBreedRepository}
+     */
     public CatServiceImpl(CatRepository catRepository, CatOwnerRepository catOwnerRepository, CatBreedRepository catBreedRepository) {
         this.catRepository = catRepository;
         this.catOwnerRepository = catOwnerRepository;
