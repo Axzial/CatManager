@@ -81,7 +81,6 @@ public class CatOwnerServiceImpl implements CatOwnerService {
                     cat.setOwner(catOwner);
                     catOwner.getCatList().add(cat);
                     catRepository.save(cat);
-
                 }
             });
         }
@@ -96,6 +95,28 @@ public class CatOwnerServiceImpl implements CatOwnerService {
             CatOwner savedCatOwner = catOwnerRepository.save(catOwner);
             return Optional.of(savedCatOwner);
         } else throw new CatOwnerNotFoundException("Can't find CatOwner with id: " + id);
+    }
+
+    @Override
+    public Optional<CatOwnerReturnDto> updateWithCatsId(long id, CatOwnerWithCatsIdDto catOwnerWithCatsIdDto) {
+        if (findById(id).isPresent()) {
+            CatOwner catOwner = new CatOwner();
+            catOwner.setName(catOwnerWithCatsIdDto.getName());
+            if (catOwnerWithCatsIdDto.getCatList() != null) {
+                catOwnerWithCatsIdDto.getCatList().forEach(e -> {
+                    Optional<Cat> optionalCat = catRepository.findById(e);
+                    if (optionalCat.isPresent()) {
+                        Cat cat = optionalCat.get();
+                        cat.setOwner(catOwner);
+                        catOwner.getCatList().add(cat);
+                        catRepository.save(cat);
+                    }
+                });
+            }
+            return Optional.of(modelMapper.map(catOwnerRepository.save(catOwner), CatOwnerReturnDto.class));
+        } else throw new CatOwnerNotFoundException("Can't find CatOwner with id: " + id);
+
+
     }
 
     @Override

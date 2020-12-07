@@ -84,17 +84,20 @@ public class CatServiceImpl implements CatService {
         cat.setColor(catWithOwnerIdDto.getColor());
         cat.setId(catWithOwnerIdDto.getId());
 
+        //Breed
         Optional<CatBreed> optionalCatBreed = catBreedRepository.findById(catWithOwnerIdDto.getCatBreedId());
         if (optionalCatBreed.isEmpty()) cat.setCatBreed(null);
         else {
             cat.setCatBreed(optionalCatBreed.get());
         }
 
+        //Owner
         Optional<CatOwner> optionalCatOwner = catOwnerRepository.findById(catWithOwnerIdDto.getOwnerId());
-
         if (optionalCatOwner.isEmpty()) cat.setOwner(null);
         else {
-            cat.setOwner(optionalCatOwner.get());
+            CatOwner catOwner = optionalCatOwner.get();
+            cat.setOwner(catOwner);
+            catOwner.addCat(cat);
         }
 
         return modelMapper.map(catRepository.save(cat), CatReturnDto.class);
@@ -112,6 +115,28 @@ public class CatServiceImpl implements CatService {
 
     @Override
     public Optional<CatReturnDto> updateWithOwnerIdDto(long id, CatWithOwnerIdDto catWithOwnerIdDto) {
+        Cat cat = new Cat();
+        cat.setName(catWithOwnerIdDto.getName());
+        cat.setColor(catWithOwnerIdDto.getColor());
+        cat.setId(catWithOwnerIdDto.getId());
+
+        //Breed
+        Optional<CatBreed> optionalCatBreed = catBreedRepository.findById(catWithOwnerIdDto.getCatBreedId());
+        if (optionalCatBreed.isEmpty()) cat.setCatBreed(null);
+        else {
+            cat.setCatBreed(optionalCatBreed.get());
+        }
+
+        //Owner
+        Optional<CatOwner> optionalCatOwner = catOwnerRepository.findById(catWithOwnerIdDto.getOwnerId());
+        if (optionalCatOwner.isEmpty()) cat.setOwner(null);
+        else {
+            CatOwner catOwner = optionalCatOwner.get();
+            catOwner.addCat(cat);
+            cat.setOwner(catOwner);
+            catRepository.save(cat);
+        }
+
         if (findById(id).isPresent()) {
             catWithOwnerIdDto.setId(id);
             return Optional.ofNullable(saveWithOwnerIdDto(catWithOwnerIdDto));

@@ -63,6 +63,8 @@ public interface CatOwnerService {
      */
     Optional<CatOwner> update(long id, CatOwnerDto catOwnerDto) throws CatOwnerNotFoundException;
 
+    Optional<CatOwnerReturnDto> updateWithCatsId(long id, CatOwnerWithCatsIdDto catOwnerWithCatsIdDto);
+
     /**
      * Delete a {@link CatOwner}.
      *

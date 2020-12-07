@@ -72,8 +72,8 @@ public class CatOwnerController {
      * @return the response entity
      */
     @PatchMapping("/{id}")
-    public ResponseEntity<CatOwner> update(@PathVariable long id, @RequestBody CatOwnerDto catOwnerDto) {
-        return catOwnerService.update(id, catOwnerDto).map(ResponseEntity::ok)
+    public ResponseEntity<CatOwnerReturnDto> update(@PathVariable long id, @RequestBody CatOwnerWithCatsIdDto catOwnerWithCatsIdDto) {
+        return catOwnerService.updateWithCatsId(id, catOwnerWithCatsIdDto).map(ResponseEntity::ok)
                 .orElseThrow(() -> new CatOwnerNotFoundException("Can't find CatOwner with id: " + id));
     }
 
