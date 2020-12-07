@@ -5,6 +5,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+/**
+ * The {@link CatBreed}.
+ */
 @Entity
 @NoArgsConstructor
 @Data

@@ -5,6 +5,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+/**
+ * The {@link Cat}.
+ */
 @Entity
 @NoArgsConstructor
 @Data
@@ -22,6 +25,11 @@ public class Cat {
     @ManyToOne
     private CatOwner owner;
 
+    /**
+     * Instantiates a new {@link Cat} with a name only.
+     *
+     * @param name the name
+     */
     public Cat(String name) {
         this.name = name;
     }

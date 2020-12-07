@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * The {@link CatOwner}
+ */
 @Entity
 @Data
 public class CatOwner {
@@ -21,14 +24,27 @@ public class CatOwner {
     @Column(name = "cat_owner_cats")
     private List<Cat> catList;
 
+    /**
+     * Add {@link Cat} to the catList.
+     *
+     * @param cat the cat
+     */
     public void addCat(Cat cat){
         catList.add(cat);
     }
 
+    /**
+     * Instantiates a new {@link CatOwner}
+     */
     public CatOwner() {
         catList = new ArrayList<>();
     }
 
+    /**
+     * Instantiates a new {@link CatOwner} with a name only
+     *
+     * @param name the name
+     */
     public CatOwner(String name) {
         this.name = name;
         catList = new ArrayList<>();
