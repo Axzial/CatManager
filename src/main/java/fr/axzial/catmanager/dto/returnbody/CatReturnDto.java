@@ -4,6 +4,10 @@ import fr.axzial.catmanager.model.CatBreed;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * The {@link fr.axzial.catmanager.model.Cat} return dto.
+ * Used to return a {@link fr.axzial.catmanager.model.Cat} with a {@link CatOwnerSimpleDto}
+ */
 @NoArgsConstructor
 @Data
 public class CatReturnDto {

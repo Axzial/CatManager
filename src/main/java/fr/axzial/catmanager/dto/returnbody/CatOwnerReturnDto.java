@@ -6,6 +6,10 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * The {@link Cat} owner return dto.
+ * Used to return a {@link fr.axzial.catmanager.model.CatOwner} but with a {@link CatSimpleDto} {@link List}
+ */
 @NoArgsConstructor
 @Data
 public class CatOwnerReturnDto {

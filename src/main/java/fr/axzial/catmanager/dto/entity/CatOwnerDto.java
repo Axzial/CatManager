@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * The {@link fr.axzial.catmanager.model.CatOwner} dto.
+ */
 @NoArgsConstructor
 @Data
 public class CatOwnerDto {

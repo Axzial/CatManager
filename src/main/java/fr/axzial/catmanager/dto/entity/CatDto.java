@@ -5,6 +5,9 @@ import fr.axzial.catmanager.model.CatOwner;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * The {@link fr.axzial.catmanager.model.Cat} dto.
+ */
 @NoArgsConstructor
 @Data
 public class CatDto {
