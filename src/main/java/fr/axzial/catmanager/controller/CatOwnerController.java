@@ -1,7 +1,7 @@
 package fr.axzial.catmanager.controller;
 
 import fr.axzial.catmanager.dto.entity.CatOwnerDto;
-import fr.axzial.catmanager.dto.requestbody.CatOwnerWithCatsId;
+import fr.axzial.catmanager.dto.requestbody.CatOwnerWithCatsIdDto;
 import fr.axzial.catmanager.dto.returnbody.CatOwnerReturnDto;
 import fr.axzial.catmanager.exception.CatOwnerNotFoundException;
 import fr.axzial.catmanager.model.CatOwner;
@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * The {@link CatOwner} controller.
@@ -57,12 +56,12 @@ public class CatOwnerController {
     /**
      * Add a new {@link CatOwner}
      *
-     * @param catOwnerWithCatsId the {@link CatOwner} with cats id
+     * @param catOwnerWithCatsIdDto the {@link CatOwner} with cats id
      * @return the response entity
      */
     @PutMapping
-    public ResponseEntity<CatOwnerReturnDto> addCatOwner(@RequestBody CatOwnerWithCatsId catOwnerWithCatsId){
-        return new ResponseEntity<>(catOwnerService.saveWithCatsId(catOwnerWithCatsId), HttpStatus.CREATED);
+    public ResponseEntity<CatOwnerReturnDto> addCatOwner(@RequestBody CatOwnerWithCatsIdDto catOwnerWithCatsIdDto){
+        return new ResponseEntity<>(catOwnerService.saveWithCatsId(catOwnerWithCatsIdDto), HttpStatus.CREATED);
     }
 
     /**
