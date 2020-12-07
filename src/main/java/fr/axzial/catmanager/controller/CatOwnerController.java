@@ -37,7 +37,7 @@ public class CatOwnerController {
      * @return the response entity
      */
     @GetMapping
-    public ResponseEntity<List<CatOwnerReturnDto>> getOwners(){
+    public ResponseEntity<List<CatOwnerReturnDto>> getOwners() {
         return new ResponseEntity<>(catOwnerService.findAllSimple(), new HttpHeaders(), HttpStatus.OK);
     }
 
@@ -48,7 +48,7 @@ public class CatOwnerController {
      * @return the response entity
      */
     @GetMapping("/{id}")
-    public ResponseEntity<CatOwner> getOwner(@PathVariable long id){
+    public ResponseEntity<CatOwner> getOwner(@PathVariable long id) {
         return catOwnerService.findById(id).map(ResponseEntity::ok)
                 .orElseThrow(() -> new CatOwnerNotFoundException("Can't find CatOwner with id: " + id));
     }
@@ -60,7 +60,7 @@ public class CatOwnerController {
      * @return the response entity
      */
     @PutMapping
-    public ResponseEntity<CatOwnerReturnDto> addCatOwner(@RequestBody CatOwnerWithCatsIdDto catOwnerWithCatsIdDto){
+    public ResponseEntity<CatOwnerReturnDto> addCatOwner(@RequestBody CatOwnerWithCatsIdDto catOwnerWithCatsIdDto) {
         return new ResponseEntity<>(catOwnerService.saveWithCatsId(catOwnerWithCatsIdDto), HttpStatus.CREATED);
     }
 
@@ -72,7 +72,7 @@ public class CatOwnerController {
      * @return the response entity
      */
     @PatchMapping("/{id}")
-    public ResponseEntity<CatOwner> update(@PathVariable long id, @RequestBody CatOwnerDto catOwnerDto){
+    public ResponseEntity<CatOwner> update(@PathVariable long id, @RequestBody CatOwnerDto catOwnerDto) {
         return catOwnerService.update(id, catOwnerDto).map(ResponseEntity::ok)
                 .orElseThrow(() -> new CatOwnerNotFoundException("Can't find CatOwner with id: " + id));
     }
@@ -83,7 +83,7 @@ public class CatOwnerController {
      * @param id the id of the {@link CatOwner}
      */
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable long id){
+    public void delete(@PathVariable long id) {
         catOwnerService.delete(id);
     }
 }

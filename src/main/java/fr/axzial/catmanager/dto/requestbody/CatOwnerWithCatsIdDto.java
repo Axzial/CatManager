@@ -1,6 +1,5 @@
 package fr.axzial.catmanager.dto.requestbody;
 
-import fr.axzial.catmanager.model.Cat;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

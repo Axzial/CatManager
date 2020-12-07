@@ -15,10 +15,11 @@ public class SwaggerConfig {
 
     /**
      * Swagger Main Config
+     *
      * @return
      */
     @Bean
-    public Docket api(){
+    public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("fr.axzial.catmanager"))

@@ -48,7 +48,7 @@ public class CatOwnerServiceImpl implements CatOwnerService {
     public List<CatOwnerReturnDto> findAllSimple() {
         List<CatOwner> catList = catOwnerRepository.findAll();
         List<CatOwnerReturnDto> catSimpleDtoList = new ArrayList<>();
-        for (CatOwner catOwner : catList){
+        for (CatOwner catOwner : catList) {
             catSimpleDtoList.add(modelMapper.map(catOwner, CatOwnerReturnDto.class));
         }
         return catSimpleDtoList;
@@ -63,7 +63,7 @@ public class CatOwnerServiceImpl implements CatOwnerService {
     public CatOwner save(CatOwnerDto catOwnerDto) {
         CatOwner catOwner = modelMapper.map(catOwnerDto, CatOwner.class);
         catOwnerRepository.save(catOwner);
-        if (!catOwner.getCatList().isEmpty()){
+        if (!catOwner.getCatList().isEmpty()) {
             catOwner.getCatList().stream().peek(e -> e.setOwner(catOwner)).forEach(catRepository::save);
         }
         return catOwnerRepository.save(catOwner);
@@ -73,10 +73,10 @@ public class CatOwnerServiceImpl implements CatOwnerService {
     public CatOwnerReturnDto saveWithCatsId(CatOwnerWithCatsIdDto catOwnerWithCatsIdDto) {
         CatOwner catOwner = new CatOwner();
         catOwner.setName(catOwnerWithCatsIdDto.getName());
-        if (catOwnerWithCatsIdDto.getCatList() != null){
+        if (catOwnerWithCatsIdDto.getCatList() != null) {
             catOwnerWithCatsIdDto.getCatList().forEach(e -> {
                 Optional<Cat> optionalCat = catRepository.findById(e);
-                if (optionalCat.isPresent()){
+                if (optionalCat.isPresent()) {
                     Cat cat = optionalCat.get();
                     cat.setOwner(catOwner);
                     catOwner.getCatList().add(cat);
@@ -90,7 +90,7 @@ public class CatOwnerServiceImpl implements CatOwnerService {
 
     @Override
     public Optional<CatOwner> update(long id, CatOwnerDto catOwnerDto) throws BreedNotFoundException {
-        if (findById(id).isPresent()){
+        if (findById(id).isPresent()) {
             CatOwner catOwner = modelMapper.map(catOwnerDto, CatOwner.class);
             catOwner.setId(id);
             CatOwner savedCatOwner = catOwnerRepository.save(catOwner);
@@ -100,7 +100,7 @@ public class CatOwnerServiceImpl implements CatOwnerService {
 
     @Override
     public void delete(long id) throws BreedNotFoundException {
-        if (catOwnerRepository.findById(id).isPresent()){
+        if (catOwnerRepository.findById(id).isPresent()) {
             catOwnerRepository.findById(id).get().getCatList().forEach(e -> e.setOwner(null));
             catOwnerRepository.deleteById(id);
         } else throw new CatOwnerNotFoundException("Can't find CatOwner with id: " + id);

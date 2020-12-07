@@ -49,7 +49,7 @@ public class CatBreedServiceImpl implements CatBreedService {
 
     @Override
     public Optional<CatBreed> update(long id, CatBreedDto catBreedDto) throws BreedNotFoundException {
-        if (findById(id).isPresent()){
+        if (catBreedRepository.findById(id).isPresent()) {
             CatBreed catBreed = modelMapper.map(catBreedDto, CatBreed.class);
             catBreed.setId(id);
             CatBreed savedCatBreed = catBreedRepository.save(catBreed);
@@ -58,9 +58,9 @@ public class CatBreedServiceImpl implements CatBreedService {
     }
 
     @Override
-    public void delete(long id) throws BreedNotFoundException {
-        if (findById(id).isPresent()){
-            catBreedRepository.deleteById(id);
-        } else throw new BreedNotFoundException("Can't find Breed with id: " + id);
+    public void deleteById(long id) {
+        if (catBreedRepository.findById(id).isPresent()) catBreedRepository.deleteById(id);
+        else throw new BreedNotFoundException("Can't find Breed with id: " + id);
     }
+
 }

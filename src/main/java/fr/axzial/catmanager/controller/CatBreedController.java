@@ -35,7 +35,7 @@ public class CatBreedController {
      * @return the response entity
      */
     @GetMapping
-    public ResponseEntity<List<CatBreed>> getBreeds(){
+    public ResponseEntity<List<CatBreed>> getBreeds() {
         List<CatBreed> catBreeds = catBreedService.findAll();
         return new ResponseEntity<>(catBreeds, new HttpHeaders(), HttpStatus.OK);
     }
@@ -47,18 +47,19 @@ public class CatBreedController {
      * @return the response entity
      */
     @GetMapping("/{id}")
-    public ResponseEntity<CatBreed> getBreed(@PathVariable long id){
+    public ResponseEntity<CatBreed> getBreed(@PathVariable long id) {
         return catBreedService.findById(id).map(ResponseEntity::ok)
                 .orElseThrow(() -> new BreedNotFoundException("Can't find Breed with id: " + id));
     }
 
     /**
      * Add a new {@link CatBreed}
+     *
      * @param catBreedDto the {@link CatBreed} dto
      * @return the response entity
      */
     @PutMapping
-    public ResponseEntity<CatBreed> addBreed(@RequestBody CatBreedDto catBreedDto){
+    public ResponseEntity<CatBreed> addBreed(@RequestBody CatBreedDto catBreedDto) {
         return new ResponseEntity<>(catBreedService.save(catBreedDto), HttpStatus.CREATED);
     }
 
@@ -70,7 +71,7 @@ public class CatBreedController {
      * @return the response entity
      */
     @PatchMapping("/{id}")
-    public ResponseEntity<CatBreed> update(@PathVariable long id, @RequestBody CatBreedDto catBreedDto){
+    public ResponseEntity<CatBreed> update(@PathVariable long id, @RequestBody CatBreedDto catBreedDto) {
         return catBreedService.update(id, catBreedDto).map(ResponseEntity::ok)
                 .orElseThrow(() -> new BreedNotFoundException("Can't find Breed with id: " + id));
     }
@@ -79,10 +80,11 @@ public class CatBreedController {
      * Delete a {@link CatBreed}.
      *
      * @param id the id of the {@link CatBreed}
+     * @return
      */
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable long id){
-        catBreedService.delete(id);
+    public void delete(@PathVariable long id) {
+        catBreedService.deleteById(id);
     }
 
 }

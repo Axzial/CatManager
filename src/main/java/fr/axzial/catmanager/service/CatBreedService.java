@@ -50,5 +50,7 @@ public interface CatBreedService {
      * @param id the id of the {@link CatBreed}
      * @throws BreedNotFoundException the {@link BreedNotFoundException}
      */
-    void delete(long id) throws BreedNotFoundException;
+    void deleteById(long id);
+
+
 }

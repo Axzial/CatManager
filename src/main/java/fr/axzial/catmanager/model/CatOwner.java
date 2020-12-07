@@ -1,12 +1,10 @@
 package fr.axzial.catmanager.model;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * The {@link CatOwner}
@@ -29,7 +27,7 @@ public class CatOwner {
      *
      * @param cat the cat
      */
-    public void addCat(Cat cat){
+    public void addCat(Cat cat) {
         catList.add(cat);
     }
 

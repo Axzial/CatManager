@@ -63,7 +63,7 @@ public class CatServiceImpl implements CatService {
     public List<CatReturnDto> findAllSimple() {
         List<Cat> catList = catRepository.findAll();
         List<CatReturnDto> catReturnDtoList = new ArrayList<>();
-        for (Cat cat : catList){
+        for (Cat cat : catList) {
             CatReturnDto catReturnDto = modelMapper.map(cat, CatReturnDto.class);
             catReturnDtoList.add(catReturnDto);
         }
@@ -93,7 +93,7 @@ public class CatServiceImpl implements CatService {
         Optional<CatOwner> optionalCatOwner = catOwnerRepository.findById(catWithOwnerIdDto.getOwnerId());
 
         if (optionalCatOwner.isEmpty()) cat.setOwner(null);
-        else{
+        else {
             cat.setOwner(optionalCatOwner.get());
         }
 
@@ -102,7 +102,7 @@ public class CatServiceImpl implements CatService {
 
     @Override
     public Optional<Cat> update(long id, CatDto catDto) throws CatNotFoundException {
-        if (findById(id).isPresent()){
+        if (findById(id).isPresent()) {
             Cat cat = modelMapper.map(catDto, Cat.class);
             cat.setId(id);
             Cat savedCat = catRepository.save(cat);
@@ -112,7 +112,7 @@ public class CatServiceImpl implements CatService {
 
     @Override
     public Optional<CatReturnDto> updateWithOwnerIdDto(long id, CatWithOwnerIdDto catWithOwnerIdDto) {
-        if (findById(id).isPresent()){
+        if (findById(id).isPresent()) {
             catWithOwnerIdDto.setId(id);
             return Optional.ofNullable(saveWithOwnerIdDto(catWithOwnerIdDto));
         } else throw new CatNotFoundException("Can't find Cat with id: " + id);
@@ -120,7 +120,7 @@ public class CatServiceImpl implements CatService {
 
     @Override
     public void delete(long id) throws CatNotFoundException {
-        if (findById(id).isPresent()){
+        if (findById(id).isPresent()) {
             catRepository.deleteById(id);
         } else throw new CatNotFoundException("Can't find Cat with id: " + id);
     }

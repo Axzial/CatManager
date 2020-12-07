@@ -1,6 +1,5 @@
 package fr.axzial.catmanager.controller;
 
-import fr.axzial.catmanager.dto.entity.CatDto;
 import fr.axzial.catmanager.dto.requestbody.CatWithOwnerIdDto;
 import fr.axzial.catmanager.dto.returnbody.CatReturnDto;
 import fr.axzial.catmanager.exception.CatNotFoundException;
@@ -39,7 +38,7 @@ public class CatController {
      * @return the response entity
      */
     @GetMapping
-    public ResponseEntity<List<CatReturnDto>> getCats(){
+    public ResponseEntity<List<CatReturnDto>> getCats() {
         List<CatReturnDto> catList = catService.findAllSimple();
         return new ResponseEntity<>(catList, new HttpHeaders(), HttpStatus.OK);
     }
@@ -51,7 +50,7 @@ public class CatController {
      * @return the response entity
      */
     @GetMapping("/{id}")
-    public ResponseEntity<CatReturnDto> getCat(@PathVariable long id){
+    public ResponseEntity<CatReturnDto> getCat(@PathVariable long id) {
         return catService.findByIdSimple(id).map(ResponseEntity::ok)
                 .orElseThrow(() -> new CatNotFoundException("Can't find Cat with id: " + id));
     }
@@ -63,7 +62,7 @@ public class CatController {
      * @return the response entity
      */
     @PutMapping
-    public ResponseEntity<CatReturnDto> addCat(@RequestBody CatWithOwnerIdDto catWithOwnerIdDto){
+    public ResponseEntity<CatReturnDto> addCat(@RequestBody CatWithOwnerIdDto catWithOwnerIdDto) {
         return new ResponseEntity<>(catService.saveWithOwnerIdDto(catWithOwnerIdDto), HttpStatus.CREATED);
     }
 
@@ -75,7 +74,7 @@ public class CatController {
      * @return the response entity
      */
     @PatchMapping("/{id}")
-    public ResponseEntity<CatReturnDto> update(@PathVariable long id, @RequestBody CatWithOwnerIdDto catWithOwnerIdDto){
+    public ResponseEntity<CatReturnDto> update(@PathVariable long id, @RequestBody CatWithOwnerIdDto catWithOwnerIdDto) {
         return catService.updateWithOwnerIdDto(id, catWithOwnerIdDto).map(ResponseEntity::ok)
                 .orElseThrow(() -> new CatNotFoundException("Can't find Cat with id: " + id));
     }
@@ -86,7 +85,7 @@ public class CatController {
      * @param id the id of the {@link Cat}
      */
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable long id){
+    public void delete(@PathVariable long id) {
         catService.delete(id);
     }
 }
