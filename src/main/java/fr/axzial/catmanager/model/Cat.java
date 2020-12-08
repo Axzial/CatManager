@@ -34,5 +34,16 @@ public class Cat {
         this.name = name;
     }
 
+    public Cat(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
+    public Cat(long id, String name, CatBreed catBreed, String color, CatOwner owner) {
+        this.id = id;
+        this.name = name;
+        this.catBreed = catBreed;
+        this.color = color;
+        this.owner = owner;
+    }
 }
