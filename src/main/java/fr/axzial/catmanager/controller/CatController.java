@@ -52,7 +52,7 @@ public class CatController {
     @GetMapping("/{id}")
     public ResponseEntity<CatReturnDto> getCat(@PathVariable long id) {
         return catService.findByIdSimple(id).map(ResponseEntity::ok)
-                .orElseThrow(() -> new CatNotFoundException("Can't find Cat with id: " + id));
+                .orElseThrow(CatNotFoundException::new);
     }
 
     /**
@@ -76,7 +76,7 @@ public class CatController {
     @PatchMapping("/{id}")
     public ResponseEntity<CatReturnDto> update(@PathVariable long id, @RequestBody CatWithOwnerIdDto catWithOwnerIdDto) {
         return catService.updateWithOwnerIdDto(id, catWithOwnerIdDto).map(ResponseEntity::ok)
-                .orElseThrow(() -> new CatNotFoundException("Can't find Cat with id: " + id));
+                .orElseThrow(CatNotFoundException::new);
     }
 
     /**

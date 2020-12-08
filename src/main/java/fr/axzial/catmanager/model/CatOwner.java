@@ -38,6 +38,12 @@ public class CatOwner {
         catList = new ArrayList<>();
     }
 
+    public CatOwner(long id, String name) {
+        this.id = id;
+        this.name = name;
+        catList = new ArrayList<>();
+    }
+
     /**
      * Instantiates a new {@link CatOwner} with a name only
      *

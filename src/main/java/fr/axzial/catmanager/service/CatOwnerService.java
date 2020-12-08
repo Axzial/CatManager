@@ -9,6 +9,7 @@ import fr.axzial.catmanager.model.CatOwner;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.IntStream;
 
 /**
  * The {@link CatOwner} service interface.
@@ -73,4 +74,6 @@ public interface CatOwnerService {
      * @throws CatOwnerNotFoundException the {@link CatOwnerNotFoundException}
      */
     void delete(long id);
+
+    Optional<CatOwnerReturnDto> findByIdSimple(long id);
 }

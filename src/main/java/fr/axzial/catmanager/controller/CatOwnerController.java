@@ -47,9 +47,9 @@ public class CatOwnerController {
      * @return the response entity
      */
     @GetMapping("/{id}")
-    public ResponseEntity<CatOwner> getOwner(@PathVariable long id) {
-        return catOwnerService.findById(id).map(ResponseEntity::ok)
-                .orElseThrow(() -> new CatOwnerNotFoundException("Can't find CatOwner with id: " + id));
+    public ResponseEntity<CatOwnerReturnDto> getOwner(@PathVariable long id) {
+        return catOwnerService.findByIdSimple(id).map(ResponseEntity::ok)
+                .orElseThrow(CatOwnerNotFoundException::new);
     }
 
     /**
