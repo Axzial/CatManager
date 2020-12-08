@@ -58,7 +58,7 @@ public class CatOwnerController {
      * @param catOwnerWithCatsIdDto the {@link CatOwner} with cats id
      * @return the response entity
      */
-    @PutMapping
+    @PostMapping
     public ResponseEntity<CatOwnerReturnDto> addCatOwner(@RequestBody CatOwnerWithCatsIdDto catOwnerWithCatsIdDto) {
         return new ResponseEntity<>(catOwnerService.saveWithCatsId(catOwnerWithCatsIdDto), HttpStatus.CREATED);
     }

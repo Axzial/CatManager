@@ -58,7 +58,7 @@ public class CatBreedController {
      * @param catBreedDto the {@link CatBreed} dto
      * @return the response entity
      */
-    @PutMapping
+    @PostMapping
     public ResponseEntity<CatBreed> addBreed(@RequestBody CatBreedDto catBreedDto) {
         return new ResponseEntity<>(catBreedService.save(catBreedDto), HttpStatus.CREATED);
     }
