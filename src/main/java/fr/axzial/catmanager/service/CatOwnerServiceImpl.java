@@ -3,7 +3,7 @@ package fr.axzial.catmanager.service;
 import fr.axzial.catmanager.dto.CatOwnerDto;
 import fr.axzial.catmanager.dto.CatOwnerWithCatsIdDto;
 import fr.axzial.catmanager.dto.CatOwnerReturnDto;
-import fr.axzial.catmanager.exception.BreedNotFoundException;
+import fr.axzial.catmanager.exception.CatBreedNotFoundException;
 import fr.axzial.catmanager.exception.CatOwnerNotFoundException;
 import fr.axzial.catmanager.model.Cat;
 import fr.axzial.catmanager.model.CatOwner;
@@ -88,7 +88,7 @@ public class CatOwnerServiceImpl implements CatOwnerService {
     }
 
     @Override
-    public Optional<CatOwner> update(long id, CatOwnerDto catOwnerDto) throws BreedNotFoundException {
+    public Optional<CatOwner> update(long id, CatOwnerDto catOwnerDto) {
         if (findById(id).isPresent()) {
             CatOwner catOwner = modelMapper.map(catOwnerDto, CatOwner.class);
             catOwner.setId(id);
@@ -120,7 +120,7 @@ public class CatOwnerServiceImpl implements CatOwnerService {
     }
 
     @Override
-    public void delete(long id) throws BreedNotFoundException {
+    public void delete(long id) {
         if (catOwnerRepository.findById(id).isPresent()) {
             catOwnerRepository.findById(id).get().getCatList().forEach(e -> e.setOwner(null));
             catOwnerRepository.deleteById(id);

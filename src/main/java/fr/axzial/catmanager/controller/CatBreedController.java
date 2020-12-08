@@ -1,7 +1,7 @@
 package fr.axzial.catmanager.controller;
 
 import fr.axzial.catmanager.dto.CatBreedDto;
-import fr.axzial.catmanager.exception.BreedNotFoundException;
+import fr.axzial.catmanager.exception.CatBreedNotFoundException;
 import fr.axzial.catmanager.model.CatBreed;
 import fr.axzial.catmanager.service.CatBreedService;
 import org.springframework.http.HttpHeaders;
@@ -49,7 +49,7 @@ public class CatBreedController {
     @GetMapping("/{id}")
     public ResponseEntity<CatBreed> getBreed(@PathVariable long id) {
         return catBreedService.findById(id).map(ResponseEntity::ok)
-                .orElseThrow(() -> new BreedNotFoundException("Can't find Breed with id: " + id));
+                .orElseThrow(() -> new CatBreedNotFoundException("Can't find Breed with id: " + id));
     }
 
     /**
@@ -73,7 +73,7 @@ public class CatBreedController {
     @PatchMapping("/{id}")
     public ResponseEntity<CatBreed> update(@PathVariable long id, @RequestBody CatBreedDto catBreedDto) {
         return catBreedService.update(id, catBreedDto).map(ResponseEntity::ok)
-                .orElseThrow(() -> new BreedNotFoundException("Can't find Breed with id: " + id));
+                .orElseThrow(() -> new CatBreedNotFoundException("Can't find Breed with id: " + id));
     }
 
     /**

@@ -1,7 +1,7 @@
 package fr.axzial.catmanager.service;
 
 import fr.axzial.catmanager.dto.CatBreedDto;
-import fr.axzial.catmanager.exception.BreedNotFoundException;
+import fr.axzial.catmanager.exception.CatBreedNotFoundException;
 import fr.axzial.catmanager.model.CatBreed;
 
 import java.util.List;
@@ -40,15 +40,15 @@ public interface CatBreedService {
      * @param id          the id of the {@link CatBreed}
      * @param catBreedDto the {@link CatBreedDto}
      * @return the optional {@link CatBreed}
-     * @throws BreedNotFoundException the {@link BreedNotFoundException}
+     * @throws CatBreedNotFoundException the {@link CatBreedNotFoundException}
      */
-    Optional<CatBreed> update(long id, CatBreedDto catBreedDto) throws BreedNotFoundException;
+    Optional<CatBreed> update(long id, CatBreedDto catBreedDto);
 
     /**
      * Delete {@link CatBreed}.
      *
      * @param id the id of the {@link CatBreed}
-     * @throws BreedNotFoundException the {@link BreedNotFoundException}
+     * @throws CatBreedNotFoundException the {@link CatBreedNotFoundException}
      */
     void deleteById(long id);
 

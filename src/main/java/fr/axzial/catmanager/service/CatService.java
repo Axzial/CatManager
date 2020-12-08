@@ -52,7 +52,7 @@ public interface CatService {
      * @return the optional {@link Cat}
      * @throws CatNotFoundException the {@link CatNotFoundException}
      */
-    Optional<Cat> update(long id, CatDto catDto) throws CatNotFoundException;
+    Optional<Cat> update(long id, CatDto catDto);
 
     /**
      * Delete a {@link Cat}.
@@ -60,7 +60,7 @@ public interface CatService {
      * @param id the id of the {@link Cat}
      * @throws CatNotFoundException the {@link CatNotFoundException}
      */
-    void delete(long id) throws CatNotFoundException;
+    void delete(long id);
 
     /**
      * Find all {@link Cat} as {@link CatReturnDto}.

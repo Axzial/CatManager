@@ -1,7 +1,7 @@
 package fr.axzial.catmanager.service;
 
 import fr.axzial.catmanager.dto.CatBreedDto;
-import fr.axzial.catmanager.exception.BreedNotFoundException;
+import fr.axzial.catmanager.exception.CatBreedNotFoundException;
 import fr.axzial.catmanager.model.CatBreed;
 import fr.axzial.catmanager.repository.CatBreedRepository;
 import org.modelmapper.ModelMapper;
@@ -48,19 +48,19 @@ public class CatBreedServiceImpl implements CatBreedService {
     }
 
     @Override
-    public Optional<CatBreed> update(long id, CatBreedDto catBreedDto) throws BreedNotFoundException {
+    public Optional<CatBreed> update(long id, CatBreedDto catBreedDto) {
         if (catBreedRepository.findById(id).isPresent()) {
             CatBreed catBreed = modelMapper.map(catBreedDto, CatBreed.class);
             catBreed.setId(id);
             CatBreed savedCatBreed = catBreedRepository.save(catBreed);
             return Optional.of(savedCatBreed);
-        } else throw new BreedNotFoundException("Can't find Breed with id: " + id);
+        } else throw new CatBreedNotFoundException("Can't find Breed with id: " + id);
     }
 
     @Override
     public void deleteById(long id) {
         if (catBreedRepository.findById(id).isPresent()) catBreedRepository.deleteById(id);
-        else throw new BreedNotFoundException("Can't find Breed with id: " + id);
+        else throw new CatBreedNotFoundException("Can't find Breed with id: " + id);
     }
 
 }

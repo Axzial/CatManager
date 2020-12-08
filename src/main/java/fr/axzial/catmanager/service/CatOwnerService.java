@@ -62,7 +62,7 @@ public interface CatOwnerService {
      * @return the optional {@link CatOwner}
      * @throws CatOwnerNotFoundException the {@link CatOwnerNotFoundException}
      */
-    Optional<CatOwner> update(long id, CatOwnerDto catOwnerDto) throws CatOwnerNotFoundException;
+    Optional<CatOwner> update(long id, CatOwnerDto catOwnerDto);
 
     Optional<CatOwnerReturnDto> updateWithCatsId(long id, CatOwnerWithCatsIdDto catOwnerWithCatsIdDto);
 
@@ -72,5 +72,5 @@ public interface CatOwnerService {
      * @param id the id of the {@link CatOwner}
      * @throws CatOwnerNotFoundException the {@link CatOwnerNotFoundException}
      */
-    void delete(long id) throws CatOwnerNotFoundException;
+    void delete(long id);
 }

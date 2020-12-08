@@ -3,7 +3,7 @@ package fr.axzial.catmanager.service;
 import fr.axzial.catmanager.dto.CatDto;
 import fr.axzial.catmanager.dto.CatWithOwnerIdDto;
 import fr.axzial.catmanager.dto.CatReturnDto;
-import fr.axzial.catmanager.exception.BreedNotFoundException;
+import fr.axzial.catmanager.exception.CatBreedNotFoundException;
 import fr.axzial.catmanager.exception.CatNotFoundException;
 import fr.axzial.catmanager.exception.CatOwnerNotFoundException;
 import fr.axzial.catmanager.model.Cat;
@@ -90,7 +90,7 @@ public class CatServiceImpl implements CatService {
         if (catWithOwnerIdDto.getCatBreedId() != 0){
             Optional<CatBreed> optionalCatBreed = catBreedRepository.findById(catWithOwnerIdDto.getCatBreedId());
             if (optionalCatBreed.isEmpty()) {
-                throw new BreedNotFoundException();
+                throw new CatBreedNotFoundException();
             }
             cat.setCatBreed(optionalCatBreed.get());
         }
@@ -111,7 +111,7 @@ public class CatServiceImpl implements CatService {
     }
 
     @Override
-    public Optional<Cat> update(long id, CatDto catDto) throws CatNotFoundException {
+    public Optional<Cat> update(long id, CatDto catDto) {
         if (findById(id).isPresent()) {
             Cat cat = modelMapper.map(catDto, Cat.class);
             cat.setId(id);
@@ -127,7 +127,7 @@ public class CatServiceImpl implements CatService {
     }
 
     @Override
-    public void delete(long id) throws CatNotFoundException {
+    public void delete(long id) {
         if (findById(id).isPresent()) {
             catRepository.deleteById(id);
         } else throw new CatNotFoundException("Can't find Cat with id: " + id);
