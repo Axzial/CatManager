@@ -3,7 +3,9 @@ package fr.axzial.catmanager.service;
 import fr.axzial.catmanager.dto.CatDto;
 import fr.axzial.catmanager.dto.CatWithOwnerIdDto;
 import fr.axzial.catmanager.dto.CatReturnDto;
+import fr.axzial.catmanager.exception.BreedNotFoundException;
 import fr.axzial.catmanager.exception.CatNotFoundException;
+import fr.axzial.catmanager.exception.CatOwnerNotFoundException;
 import fr.axzial.catmanager.model.Cat;
 import fr.axzial.catmanager.model.CatBreed;
 import fr.axzial.catmanager.model.CatOwner;
@@ -85,16 +87,21 @@ public class CatServiceImpl implements CatService {
         cat.setId(catWithOwnerIdDto.getId());
 
         //Breed
-        Optional<CatBreed> optionalCatBreed = catBreedRepository.findById(catWithOwnerIdDto.getCatBreedId());
-        if (optionalCatBreed.isEmpty()) cat.setCatBreed(null);
-        else {
+        if (catWithOwnerIdDto.getCatBreedId() != 0){
+            Optional<CatBreed> optionalCatBreed = catBreedRepository.findById(catWithOwnerIdDto.getCatBreedId());
+            if (optionalCatBreed.isEmpty()) {
+                throw new BreedNotFoundException();
+            }
             cat.setCatBreed(optionalCatBreed.get());
         }
 
+
         //Owner
-        Optional<CatOwner> optionalCatOwner = catOwnerRepository.findById(catWithOwnerIdDto.getOwnerId());
-        if (optionalCatOwner.isEmpty()) cat.setOwner(null);
-        else {
+        if (catWithOwnerIdDto.getOwnerId() != 0){
+            Optional<CatOwner> optionalCatOwner = catOwnerRepository.findById(catWithOwnerIdDto.getOwnerId());
+            if (optionalCatOwner.isEmpty()){
+                throw new CatOwnerNotFoundException();
+            }
             CatOwner catOwner = optionalCatOwner.get();
             cat.setOwner(catOwner);
             catOwner.addCat(cat);
@@ -115,32 +122,8 @@ public class CatServiceImpl implements CatService {
 
     @Override
     public Optional<CatReturnDto> updateWithOwnerIdDto(long id, CatWithOwnerIdDto catWithOwnerIdDto) {
-        Cat cat = new Cat();
-        cat.setName(catWithOwnerIdDto.getName());
-        cat.setColor(catWithOwnerIdDto.getColor());
-        cat.setId(catWithOwnerIdDto.getId());
-
-        //Breed
-        Optional<CatBreed> optionalCatBreed = catBreedRepository.findById(catWithOwnerIdDto.getCatBreedId());
-        if (optionalCatBreed.isEmpty()) cat.setCatBreed(null);
-        else {
-            cat.setCatBreed(optionalCatBreed.get());
-        }
-
-        //Owner
-        Optional<CatOwner> optionalCatOwner = catOwnerRepository.findById(catWithOwnerIdDto.getOwnerId());
-        if (optionalCatOwner.isEmpty()) cat.setOwner(null);
-        else {
-            CatOwner catOwner = optionalCatOwner.get();
-            catOwner.addCat(cat);
-            cat.setOwner(catOwner);
-            catRepository.save(cat);
-        }
-
-        if (findById(id).isPresent()) {
-            catWithOwnerIdDto.setId(id);
-            return Optional.ofNullable(saveWithOwnerIdDto(catWithOwnerIdDto));
-        } else throw new CatNotFoundException("Can't find Cat with id: " + id);
+        catWithOwnerIdDto.setId(id);
+        return Optional.ofNullable(saveWithOwnerIdDto(catWithOwnerIdDto));
     }
 
     @Override
