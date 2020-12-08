@@ -1,4 +1,9 @@
-### CatManager 🐈
+<a href='https://travis-ci.org/github/Axzial/CatManager'>
+  <img src='https://travis-ci.org/Axzial/CatManager.svg?branch=dev'>
+</a>
+
+### CatManager 🐈 
+
 A Cat Manager made with Spring Boot
 
 ### Requirements 🧰
