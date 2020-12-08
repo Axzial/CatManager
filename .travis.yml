@@ -1,0 +1,12 @@
+#Build Env
+dist: xenial
+
+#Lang
+language: java
+
+#Jdk
+jdk:
+  - openjdk11
+
+script:
+  - mvn clean install
