@@ -1,8 +1,9 @@
-#Build Env
-dist: xenial
-
 #Lang
 language: java
+
+#Build Env
+dist: xenial
+sudo: true
 
 #Jdk
 jdk:
@@ -10,3 +11,6 @@ jdk:
 
 script:
   - mvn clean install
+
+before_install:
+  - chmod +x mvnw
