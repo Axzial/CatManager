@@ -72,17 +72,25 @@ public class CatOwnerServiceImpl implements CatOwnerService {
     public CatOwnerReturnDto saveWithCatsId(CatOwnerWithCatsIdDto catOwnerWithCatsIdDto) {
         CatOwner catOwner = new CatOwner();
         catOwner.setName(catOwnerWithCatsIdDto.getName());
+
+        //Cats
         if (catOwnerWithCatsIdDto.getCatList() != null) {
+
             catOwnerWithCatsIdDto.getCatList().forEach(e -> {
+
                 Optional<Cat> optionalCat = catRepository.findById(e);
-                if (optionalCat.isPresent()) {
-                    Cat cat = optionalCat.get();
-                    cat.setOwner(catOwner);
-                    catOwner.getCatList().add(cat);
-                    catRepository.save(cat);
+
+                if (optionalCat.isEmpty()) {
+                    throw new CatOwnerNotFoundException();
                 }
+                Cat cat = optionalCat.get();
+                cat.setOwner(catOwner);
+                catOwner.getCatList().add(cat);
+                catRepository.save(cat);
             });
+
         }
+
         return modelMapper.map(catOwnerRepository.save(catOwner), CatOwnerReturnDto.class);
     }
 
@@ -99,17 +107,25 @@ public class CatOwnerServiceImpl implements CatOwnerService {
     @Override
     public Optional<CatOwnerReturnDto> updateWithCatsId(long id, CatOwnerWithCatsIdDto catOwnerWithCatsIdDto) {
         if (findById(id).isPresent()) {
+
             CatOwner catOwner = new CatOwner();
             catOwner.setName(catOwnerWithCatsIdDto.getName());
+            catOwner.setId(id);
+
+            //Cats
             if (catOwnerWithCatsIdDto.getCatList() != null) {
+
                 catOwnerWithCatsIdDto.getCatList().forEach(e -> {
+
                     Optional<Cat> optionalCat = catRepository.findById(e);
-                    if (optionalCat.isPresent()) {
-                        Cat cat = optionalCat.get();
-                        cat.setOwner(catOwner);
-                        catOwner.getCatList().add(cat);
-                        catRepository.save(cat);
+
+                    if (optionalCat.isEmpty()) {
+                        throw new CatOwnerNotFoundException();
                     }
+                    Cat cat = optionalCat.get();
+                    cat.setOwner(catOwner);
+                    catOwner.getCatList().add(cat);
+                    catRepository.save(cat);
                 });
             }
             return Optional.of(modelMapper.map(catOwnerRepository.save(catOwner), CatOwnerReturnDto.class));
