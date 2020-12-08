@@ -18,7 +18,7 @@ public class CatOwner {
     private long id;
     @Column(name = "cat_owner_name")
     private String name;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @Column(name = "cat_owner_cats")
     private List<Cat> catList;
 

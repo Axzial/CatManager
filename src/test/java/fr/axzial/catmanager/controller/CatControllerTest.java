@@ -50,9 +50,9 @@ class CatControllerTest {
         this.mockMvc = MockMvcBuilders.standaloneSetup(catController).build();
 
         catList = new ArrayList<>();
-        catList.add(new Cat(1, "Lynx"));
-        catList.add(new Cat(2, "Félin"));
-        catList.add(new Cat(3, "Savanah"));
+        catList.add(new Cat(1, "Jean"));
+        catList.add(new Cat(2, "Patrick"));
+        catList.add(new Cat(3, "Elvira"));
 
         catReturnDtoList = new ArrayList<>();
         catReturnDtoList.add(new CatReturnDto());
