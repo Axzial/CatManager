@@ -1,6 +1,6 @@
 package fr.axzial.catmanager.controller;
 
-import fr.axzial.catmanager.dto.CatBreedDto;
+import fr.axzial.catmanager.dto.catbreed.CatBreedDto;
 import fr.axzial.catmanager.exception.CatBreedNotFoundException;
 import fr.axzial.catmanager.model.CatBreed;
 import fr.axzial.catmanager.service.CatBreedService;

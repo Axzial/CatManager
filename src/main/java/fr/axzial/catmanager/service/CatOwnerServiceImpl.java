@@ -1,9 +1,8 @@
 package fr.axzial.catmanager.service;
 
-import fr.axzial.catmanager.dto.CatOwnerDto;
-import fr.axzial.catmanager.dto.CatOwnerWithCatsIdDto;
-import fr.axzial.catmanager.dto.CatOwnerReturnDto;
-import fr.axzial.catmanager.exception.CatBreedNotFoundException;
+import fr.axzial.catmanager.dto.catowner.CatOwnerDto;
+import fr.axzial.catmanager.dto.catowner.CatOwnerWithCatsIdDto;
+import fr.axzial.catmanager.dto.catowner.CatOwnerReturnDto;
 import fr.axzial.catmanager.exception.CatOwnerNotFoundException;
 import fr.axzial.catmanager.model.Cat;
 import fr.axzial.catmanager.model.CatOwner;

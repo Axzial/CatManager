@@ -1,5 +1,6 @@
-package fr.axzial.catmanager.dto;
+package fr.axzial.catmanager.dto.cat;
 
+import fr.axzial.catmanager.dto.catowner.CatOwnerSimpleDto;
 import fr.axzial.catmanager.model.CatBreed;
 import lombok.Data;
 import lombok.NoArgsConstructor;
